@@ -49,7 +49,7 @@ const Callback = () => {
     getToken();
   }, [navigate]);
 
-  return <div><h2>Redirecting...</h2></div>;
+  return <div><h2>Redirecting to dashboard...</h2></div>;
 };
 
 export default Callback;
