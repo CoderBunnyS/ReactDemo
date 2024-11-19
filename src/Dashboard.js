@@ -10,10 +10,6 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [userDisplayName, setUserDisplayName] = useState(null);
 
-  // const handleNavigateToProfile = () => {
-  //   navigate("/profile"); // Navigate to the ProfilePage
-  // };
-
   const handleLogout = () => {
     logout();
     navigate("/");
