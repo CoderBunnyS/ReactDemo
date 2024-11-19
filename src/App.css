@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* ---------Dashboard------------ */
+
+.welcome-message {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 1.2em;
+  color: #61dafb; /* Use color consistent with your theme */
+}

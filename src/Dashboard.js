@@ -1,77 +1,142 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from './AuthContext';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "./AuthContext";
+import "./App.css";
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated, logout } = useAuth(); // Single destructure for useAuth
+  const { setIsAuthenticated, logout } = useAuth();
   const [loading, setLoading] = useState(true);
+  const [userDisplayName, setUserDisplayName] = useState(null);
+
+  // const handleNavigateToProfile = () => {
+  //   navigate("/profile"); // Navigate to the ProfilePage
+  // };
 
   const handleLogout = () => {
     logout();
-    navigate('/'); // Redirect to home page after logout
+    navigate("/");
   };
 
   useEffect(() => {
-    const exchangeToken = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
+    const fetchUserFromAPI = async (userId) => {
+      console.log("Fetching user data with ID:", userId);
 
-      // Only proceed if code exists in the URL and token is not already stored
-      if (code && !localStorage.getItem('access_token')) {
-        console.log("Authorization Code from URL:", code);
-
-        try {
-          const tokenResponse = await fetch(`${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/oauth2/token`, {
-            method: 'POST',
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/api/user/${userId}`,
+          {
             headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
+              Authorization: process.env.REACT_APP_FUSIONAUTH_API_KEY,
+              "X-FusionAuth-TenantId":
+                process.env.REACT_APP_FUSIONAUTH_TENANT_ID || "", // Optional for single-tenant setups
             },
-            body: new URLSearchParams({
-              client_id: process.env.REACT_APP_FUSIONAUTH_CLIENT_ID,
-              client_secret: process.env.REACT_APP_FUSIONAUTH_CLIENT_SECRET,
-              code,
-              grant_type: 'authorization_code',
-              redirect_uri: process.env.REACT_APP_FUSIONAUTH_REDIRECT_URI,
-            }),
-          });
+          }
+        );
+
+        if (response.ok) {
+          const userData = await response.json();
+          console.log("User Data:", userData);
+          const displayName =
+            userData.user.firstName ||
+            userData.user.username ||
+            userData.user.email ||
+            "User";
+          setUserDisplayName(displayName);
+          localStorage.setItem("user_display_name", displayName);
+        } else {
+          const errorText = await response.text();
+          console.error(
+            `Failed to fetch user data: ${response.status} - ${errorText}`
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const exchangeTokenAndFetchUser = async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+
+      if (code && !localStorage.getItem("access_token")) {
+        try {
+          console.log("Exchanging authorization code for tokens...");
+          const tokenResponse = await fetch(
+            `${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/oauth2/token`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+              body: new URLSearchParams({
+                client_id: process.env.REACT_APP_FUSIONAUTH_CLIENT_ID,
+                client_secret: process.env.REACT_APP_FUSIONAUTH_CLIENT_SECRET,
+                code,
+                grant_type: "authorization_code",
+                redirect_uri: process.env.REACT_APP_FUSIONAUTH_REDIRECT_URI,
+              }),
+            }
+          );
+
+          if (!tokenResponse.ok) {
+            const errorText = await tokenResponse.text();
+            console.error(
+              `Token exchange failed: ${tokenResponse.status} - ${errorText}`
+            );
+            navigate("/");
+            return;
+          }
 
           const tokenData = await tokenResponse.json();
-          console.log("Full Token Response:", tokenData);
+          console.log("Token Data:", tokenData);
 
-          if (tokenResponse.ok && tokenData.access_token) {
-            console.log("Received Access Token:", tokenData.access_token);
-            localStorage.setItem('access_token', tokenData.access_token);
-            localStorage.setItem('refresh_token', tokenData.refresh_token);
-            setIsAuthenticated(true); // Update authentication status
-            // Remove code from URL after token exchange
+          if (tokenData.access_token) {
+            localStorage.setItem("access_token", tokenData.access_token);
+            localStorage.setItem("refresh_token", tokenData.refresh_token);
+            setIsAuthenticated(true);
             window.history.replaceState({}, document.title, "/dashboard");
-          } else {
-            console.error('Token exchange failed:', tokenData);
-            navigate('/');
+
+            const userId = JSON.parse(
+              atob(tokenData.access_token.split(".")[1])
+            ).sub;
+            console.log("Extracted User ID:", userId);
+
+            await fetchUserFromAPI(userId);
           }
         } catch (error) {
-          console.error('Error during token exchange:', error);
-          navigate('/');
+          console.error("Error during token exchange:", error);
+          navigate("/");
         } finally {
-          setLoading(false); // Stop loading spinner after exchange attempt
+          setLoading(false);
         }
       } else {
-        // Case when no code is found in URL or token already exists
-        console.log("No authorization code found in URL or token already exists.");
+        console.log("Token already exists. Fetching user display name...");
+        const storedDisplayName = localStorage.getItem("user_display_name");
+        setUserDisplayName(storedDisplayName);
         setLoading(false);
       }
     };
 
-    exchangeToken();
+    exchangeTokenAndFetchUser();
   }, [navigate, setIsAuthenticated]);
 
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div>
+    <div className="dashboard">
+      <div className="welcome-message">
+        {userDisplayName ? `Welcome, ${userDisplayName}!` : "Welcome!"}
+      </div>
       <h1>Welcome to the Dashboard!</h1>
       <p>This content is only visible to logged-in users.</p>
+      <button>
+  <a href="https://demo.fusionauth.io/account/?client_id=02a3c029-c4f7-4468-93df-4cf553032225" target="_blank" rel="noopener noreferrer">
+    User Profile
+  </a>
+</button>
+
       <button onClick={handleLogout}>Logout</button>
     </div>
   );
