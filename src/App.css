@@ -46,3 +46,8 @@
   font-size: 1.2em;
   color: #61dafb; /* Use color consistent with your theme */
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

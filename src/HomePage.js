@@ -28,9 +28,6 @@ const HomePage = () => {
         {!isLoggedIn && (
           <button onClick={handleLogin}>Login</button>
         )}
-        <button onClick={() => console.log("Local Storage Access Token:", localStorage.getItem('access_token'))}>
-  Check Auth Status
-</button>
 
       </header>
     </div>
