@@ -1,0 +1,88 @@
+/* Universal reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Ensure the body takes up the full width of the viewport */
+    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    font-family: 'Roboto', sans-serif;
+    background: #2c3e50; /* Backup dark color */
+    overflow: hidden;
+  }
+  
+  /* Header banner styling */
+  .homepage-header {
+    position: fixed; /* Fix the header at the very top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Span the full width of the viewport */
+    z-index: 100; /* Ensure the header is above other elements */
+  }
+  
+  .fusionauth-logo {
+    width: 100%; /* Full width of the viewport */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+  }
+  
+  /* Homepage container */
+  .homepage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Content should not overlap with the header */
+    height: 100%; /* Full viewport height */
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: 100%; /* Offset the content below the fixed header */
+  }
+  
+  /* Homepage content */
+  .homepage-content {
+    padding: 20px; /* Add spacing for readability */
+    z-index: 1; /* Ensure content doesn't overlap the header */
+  }
+  
+  /* Title styling */
+  .homepage-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 20px 0 10px;
+    color: #ffffff;
+  }
+  
+  /* Subtitle styling */
+  .homepage-content p {
+    font-size: 1.2rem;
+    margin: 0 0 30px;
+    color: rgba(255, 255, 255, 0.8); /* Softer white for subtitles */
+  }
+  
+  /* Button styling */
+  .homepage-content button {
+    background-color: #f05d23; /* Orange */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .homepage-content button:hover {
+    background-color: #d44a1c; /* Darker orange on hover */
+    transform: translateY(-2px); /* Subtle hover lift */
+  }
+  
+  .homepage-content button:focus {
+    outline: 2px solid #f05d23;
+    outline-offset: 2px;
+  }
+  
