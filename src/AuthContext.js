@@ -1,8 +1,6 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-const AuthContext = createContext();
-
-export const useAuth = () => useContext(AuthContext);
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,4 +28,9 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+// Custom hook for consuming the AuthContext
+export const useAuth = () => {
+  return useContext(AuthContext);
 };

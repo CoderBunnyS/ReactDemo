@@ -1,3 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body, html {
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto;   /* Allow vertical scrolling */
+  /* Other existing styles */
+}
+
 .App {
   text-align: center;
 }
@@ -13,16 +24,36 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.app-header {
+  background-color: #333;
+  padding: 10px;
   color: white;
 }
+
+.app-header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+.app-header nav ul li {
+  display: inline;
+}
+
+.app-header nav ul li a,
+.app-header nav ul li button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.app-header nav ul li button:hover,
+.app-header nav ul li a:hover {
+  text-decoration: underline;
+}
+
 
 .App-link {
   color: #61dafb;

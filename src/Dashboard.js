@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import "./App.css";
+import "./assets/styles/Dashboard.css"
 
 
 const Dashboard = () => {
@@ -132,7 +133,9 @@ const Dashboard = () => {
     User Profile
   </a>
 </button>
-
+        <button onClick={() => navigate('/TenantManager')}>
+        Tenant Manager
+      </button>
       <button onClick={handleLogout}>Logout</button>
     </div>
   );

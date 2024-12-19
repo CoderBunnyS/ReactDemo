@@ -8,26 +8,27 @@
   body, html {
     margin: 0;
     padding: 0;
-    width: 100%; /* Ensure the body takes up the full width of the viewport */
-    height: 100%; /* Ensure the body takes up the full height of the viewport */
+    width: 100%;
+    height: 100%;
     font-family: 'Roboto', sans-serif;
-    background: #2c3e50; /* Backup dark color */
-    overflow: hidden;
+    background: #2c3e50;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-y: auto;   /* Allow vertical scrolling */
+  
   }
   
   /* Header banner styling */
   .homepage-header {
-    position: fixed; /* Fix the header at the very top */
+
     top: 0;
     left: 0;
-    width: 100%; /* Span the full width of the viewport */
-    z-index: 100; /* Ensure the header is above other elements */
+    width: 100%;
+    z-index: 100;
   }
   
   .fusionauth-logo {
-    width: 100%; /* Full width of the viewport */
-    height: auto; /* Maintain aspect ratio */
-    display: block;
+    width: auto;
+    height: auto;
   }
   
   /* Homepage container */
@@ -35,17 +36,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start; /* Content should not overlap with the header */
-    height: 100%; /* Full viewport height */
+    justify-content: flex-start;
+    height: 100%;
     text-align: center;
     box-sizing: border-box;
-    margin-top: 100%; /* Offset the content below the fixed header */
+    margin-top: 60px; /* Adjusted margin to ensure content is visible below the header */
   }
   
   /* Homepage content */
   .homepage-content {
-    padding: 20px; /* Add spacing for readability */
-    z-index: 1; /* Ensure content doesn't overlap the header */
+    padding: 20px;
+    padding-top: 60px;
+    z-index: 1;
   }
   
   /* Title styling */
@@ -60,12 +62,12 @@
   .homepage-content p {
     font-size: 1.2rem;
     margin: 0 0 30px;
-    color: rgba(255, 255, 255, 0.8); /* Softer white for subtitles */
+    color: rgba(255, 255, 255, 0.8);
   }
   
   /* Button styling */
   .homepage-content button {
-    background-color: #f05d23; /* Orange */
+    background-color: #f05d23;
     color: #ffffff;
     font-size: 1rem;
     font-weight: 600;
@@ -77,8 +79,8 @@
   }
   
   .homepage-content button:hover {
-    background-color: #d44a1c; /* Darker orange on hover */
-    transform: translateY(-2px); /* Subtle hover lift */
+    background-color: #d44a1c;
+    transform: translateY(-2px);
   }
   
   .homepage-content button:focus {

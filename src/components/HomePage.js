@@ -16,7 +16,6 @@ const HomePage = () => {
     const authorizeUrl = `${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/oauth2/authorize`;
     const clientId = process.env.REACT_APP_FUSIONAUTH_CLIENT_ID;
     const redirectUri = process.env.REACT_APP_FUSIONAUTH_REDIRECT_URI;
-
     const loginUrl = `${authorizeUrl}?client_id=${clientId}&response_type=code&redirect_uri=${encodeURIComponent(redirectUri)}&scope=openid`;
     console.log('Login URL:', loginUrl); // Debugging log
     window.location.href = loginUrl;
