@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     setIsAuthenticated(false);
-    const fusionAuthLogoutUrl = `${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/oauth2/logout?client_id=${process.env.REACT_APP_FUSIONAUTH_CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent("http://localhost:3000")}`;
+    const fusionAuthLogoutUrl = `${process.env.REACT_APP_FUSIONAUTH_BASE_URL}/oauth2/logout?client_id=${process.env.REACT_APP_FUSIONAUTH_CLIENT_ID}&post_logout_redirect_uri=${encodeURIComponent("http://localhost:3001")}`;
     window.location.href = fusionAuthLogoutUrl;
   };
 

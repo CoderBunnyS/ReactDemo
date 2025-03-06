@@ -9,6 +9,7 @@ import Users from './components/Users';
 import Applications from './components/Applications';
 import RolesGroups from './components/RolesGroups';
 import Header from './components/Header';
+import UsersList from './components/UsersList';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/TenantManager" element={<TenantManager />}>
             {/* Nested routes for TenantManager */}
             <Route path="users" element={<Users />} />
+            <Route path="users" element={<UsersList />} /> {/* Nested route for Users */}
             <Route path="applications" element={<Applications />} />
             <Route path="roles-groups" element={<RolesGroups />} />
 
