@@ -1,3 +1,76 @@
-body {
-    color: #f05d23;
+/* Dashboard.css */
+
+/* Universal reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: #2c3e50;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Dashboard container */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    margin-top: 60px;
+}
+
+/* Dashboard content */
+.dashboard-content {
+    padding: 20px;
+    padding-top: 60px;
+    z-index: 1;
+}
+
+/* Title styling */
+.dashboard-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 20px 0 10px;
+    color: #ffffff;
+}
+
+/* Subtitle styling */
+.dashboard-content p {
+    font-size: 1.2rem;
+    margin: 0 0 30px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Button styling */
+.dashboard-content button {
+    background-color: #f05d23;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-content button:hover {
+    background-color: #d44a1c;
+    transform: translateY(-2px);
+}
+
+.dashboard-content button:focus {
+    outline: 2px solid #f05d23;
+    outline-offset: 2px;
 }

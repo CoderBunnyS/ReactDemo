@@ -123,21 +123,38 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="welcome-message">
-        {userDisplayName ? `Welcome, ${userDisplayName}!` : "Welcome!"}
-      </div>
-      <h1>Welcome to the Dashboard!</h1>
-      <p>This content is only visible to logged-in users.</p>
-      <button>
-  <a href="https://demo.fusionauth.io/account/?client_id=02a3c029-c4f7-4468-93df-4cf553032225" target="_blank" rel="noopener noreferrer">
+  <div className="dashboard-content">
+    <h1 className="text-3xl font-bold mt-4 mb-2 text-white">
+      Welcome to the Dashboard!
+    </h1>
+    <p className="text-lg text-gray-300">
+      {userDisplayName ? `Welcome, ${userDisplayName}!` : "Welcome!"}
+    </p>
+    <div className="flex justify-center items-center space-x-4 mt-4">
+  <button
+    onClick={() =>
+      window.open(
+        "https://demo.fusionauth.io/account/?client_id=02a3c029-c4f7-4468-93df-4cf553032225",
+        "_blank",
+        "noopener noreferrer"
+      )
+    }
+    className="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700"
+  >
     User Profile
-  </a>
-</button>
-        <button onClick={() => navigate('/TenantManager')}>
-        Tenant Manager
-      </button>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+  </button>
+  <button
+    onClick={handleLogout}
+    className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700"
+  >
+    Logout
+  </button>
+</div>
+
+
+  </div>
+</div>
+
   );
 };
 
