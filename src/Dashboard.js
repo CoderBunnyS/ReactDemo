@@ -131,7 +131,7 @@ const Dashboard = () => {
       {userDisplayName ? `Welcome, ${userDisplayName}!` : "Welcome!"}
     </p>
     <div className="flex justify-center items-center space-x-4 mt-4">
-  <button
+  <button type="button"
     onClick={() =>
       window.open(
         "https://demo.fusionauth.io/account/?client_id=02a3c029-c4f7-4468-93df-4cf553032225",
@@ -143,12 +143,22 @@ const Dashboard = () => {
   >
     User Profile
   </button>
-  <button
+  <button type="button"
     onClick={handleLogout}
     className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700"
   >
     Logout
   </button>
+  <button type="button" className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700">
+    <a href="http://localhost:3004/" target="_blank" rel="noopener noreferrer">
+      SSO
+    </a>
+    </button>
+    <button type="button" className="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-700">
+    <a href="https://demo.fusionauth.io/tenant-manager/ee426f66-73b0-497f-bf16-962b8be0c1f2" target="_blank" rel="noopener noreferrer">
+      Tenant manager
+    </a>
+    </button>
 </div>
 
 
